@@ -11,14 +11,14 @@
   (string-append (make-string espacos #\space) caractere))
 
 (define (zig inicial numero-de-linhas caractere)
-  (when (not (eq? inicial numero-de-linhas))
+  (unless (eq? inicial numero-de-linhas)
     (println (espaco-seguido-de-caractere inicial caractere))
     (zig (+ inicial 1) numero-de-linhas caractere)))
 
 ;; Não precisa de um valor inicial, já que é possível utilizar o
 ;; número de linhas como base para alcançar o zero.
 (define (zag numero-de-linhas caractere)
-  (when (not (eq? numero-de-linhas 0))
+  (unless (eq? numero-de-linhas 0)
     ;; Tem que ser menor, se não o espaçamento fica igual o do maior.
     (println (espaco-seguido-de-caractere (- numero-de-linhas 1) caractere))
     (zag (- numero-de-linhas 1) caractere)))
