@@ -41,7 +41,17 @@
          (zig 0 numero-de-linhas caractere)
          (zag (- numero-de-linhas 1) caractere))))
 
-(println "Este programa gera uma sequência em zig-zag de caracteres.")
-(println "Escolha o número de linhas de saída:")
+(define (main)
+  (println "Este programa gera uma sequência em zig-zag de caracteres.")
 
-(zig-zag (read) "#")
+  (println "Escolha o número de linhas de saída:")
+  (define numero-de-linhas (read))
+
+  (println "Escolha o caractere:")
+  ;; Input é interpretado como símbolo por prioridade, mas queremos uma
+  ;; string para simplificar as coisas.
+  (define caractere (symbol->string (read)))
+
+  (zig-zag numero-de-linhas caractere))
+
+(main)
