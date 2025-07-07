@@ -27,6 +27,9 @@
   (cond ((not (integer? numero-de-linhas))
          ;; Mensagem de erro quando o input não é um número.
          (println "Valor inexperado, use um número inteiro"))
+        ((< numero-de-linhas 1)
+         ;; Implementar números negativos mudaria muita coisa.
+         (println "Números negativos ainda não são suportados"))
         ((eq? numero-de-linhas 0)
          ;; Linha vazia quando é zero.
          (newline))
