@@ -46,12 +46,15 @@
 
   (println "Escolha o número de linhas de saída:")
   (define numero-de-linhas (read))
+  (newline)
 
   (println "Escolha o caractere:")
   ;; Input é interpretado como símbolo por prioridade, mas queremos uma
   ;; string para simplificar as coisas.
   (define caractere (symbol->string (read)))
+  (newline)
 
+  (println "Saída:")
   (zig-zag numero-de-linhas caractere))
 
 (main)
