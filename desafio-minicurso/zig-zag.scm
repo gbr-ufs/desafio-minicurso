@@ -1,20 +1,22 @@
-;; Veja:
-;; <https://stackoverflow.com/questions/59006417/how-to-read-a-string-to-get-user-input-in-gnu-guile>.
-;; Obrigado 9716278 <https://stackoverflow.com/users/9716278/9716278>
-;; e Óscar López <https://stackoverflow.com/users/201359/%c3%93scar-l%c3%b3pez>.
+;;; Módulo contendo o programa de zig-zag.
+;; Opcionalmente, "zig" ou "zag" podem ser utilizados à sós.
 
-(define (println text)
-  (display text)
-  (newline))
+(define-module (desafio-minicurso zig-zag)
+  #:use-module (desafio-minicurso output)
+  #:export (zig
+            zag
+            zig-zag))
 
-(define (espaco-seguido-de-caractere espacos caractere)
-  (string-append (make-string espacos #\space) caractere))
-
+;; Printa uma sequência crescente de espaços seguidos caracteres CARACTERE.
+;; INICIAL define o ponto de partida dessa sequência, enquanto NUMERO-DE-LINHAS
+;; o ponto final inclusivo.
 (define (zig inicial numero-de-linhas caractere)
   (unless (eq? inicial numero-de-linhas)
     (println (espaco-seguido-de-caractere inicial caractere))
     (zig (+ inicial 1) numero-de-linhas caractere)))
 
+;; Printa uma sequência decrescente de espaços seguidos por caracteres CARACTERE.
+;; NUMERO-DE-LINHAS define o total de linhas a serem exibidas.
 ;; Não precisa de um valor inicial, já que é possível utilizar o
 ;; número de linhas como base para alcançar o zero.
 (define (zag numero-de-linhas caractere)
@@ -23,6 +25,8 @@
     (println (espaco-seguido-de-caractere (- numero-de-linhas 1) caractere))
     (zag (- numero-de-linhas 1) caractere)))
 
+;; Printa uma "escadinha" de caracteres CARACTERE, sendo NUMERO-DE-LINHAS o "pico"
+;; da escadinha.
 (define (zig-zag numero-de-linhas caractere)
   (cond ((not (integer? numero-de-linhas))
          ;; Mensagem de erro quando o input não é um número.
@@ -40,21 +44,3 @@
          ;; De resto, é procedimento normal.
          (zig 0 numero-de-linhas caractere)
          (zag (- numero-de-linhas 1) caractere))))
-
-(define (main)
-  (println "Este programa gera uma sequência em zig-zag de caracteres.")
-
-  (println "Escolha o número de linhas de saída:")
-  (define numero-de-linhas (read))
-  (newline)
-
-  (println "Escolha o caractere:")
-  ;; Input é interpretado como símbolo por prioridade, mas queremos uma
-  ;; string para simplificar as coisas.
-  (define caractere (symbol->string (read)))
-  (newline)
-
-  (println "Saída:")
-  (zig-zag numero-de-linhas caractere))
-
-(main)
